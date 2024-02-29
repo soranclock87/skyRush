@@ -28,6 +28,12 @@ let backGroundImage1 = new Image();
 backGroundImage1.src = "graphics/environment/background.png";
 let backGroundImage2 = new Image();
 backGroundImage2.src = "graphics/environment/peakpx.jpg";
+let bodySky = new Image();
+bodySky.src = "graphics/environment/cielo.jpg"
+let bodyBackManda = new Image();
+bodyBackManda.src = "graphics/environment/background-mandalorian.jpg";
+let currentBack = new Image();
+currentBack.src = "graphics/environment/cielo.jpg";
 
 // CONSTANCE
 const PLANE_SPEED = -3;
@@ -54,8 +60,8 @@ let backAudio = document.getElementById("backAudio");
 let planeSound = document.getElementById("planeAudio");
 let gameOverSound = document.getElementById("gameOverAudio");
 
-backAudio.volume = 0.4;
-planeSound.volume = 0.25;
+backAudio.volume = 0.04;
+planeSound.volume = 0.025;
 
 // GAME VARIABLES
 let score = 0;
@@ -111,6 +117,16 @@ function easterEgg(event) {
       planeImage.src === planeImage1.src 
       ? planeImage2.src 
       : planeImage1.src;
+
+      currentBack.src = document.body.style.backgroundImage.replace('url("', '').replace('")', '')
+      currentBack.src =
+      currentBack.src === bodySky.src
+        ? bodyBackManda.src
+        : bodySky.src;
+
+        document.body.style.backgroundImage = 'url(' + currentBack.src + ')';
+        
+      console.log(document.body.style.backgroundImage.replace('url("', '').replace('")', ''))
     backGroundImage.src =
       backGroundImage.src === backGroundImage1.src
         ? backGroundImage2.src
@@ -226,7 +242,7 @@ function increaseScore() {
     audio.play();
     //Each 2 stick the dificulty increase , dificulty is velocity
     if (score % 2 === 0) {
-      dificulty += 0.1;
+      dificulty += 0.25;
     }
   }
 
@@ -289,6 +305,7 @@ function resetGame() {
   mountX = 400;
   mountY = canvas.height - 200;
   score = 0;
+  currentBack.src = bodySky.src
   dificulty = 1.5;
   planeImage.src = "graphics/plane/red0.png";
   backGroundImage.src = "graphics/environment/background.png";
@@ -300,8 +317,11 @@ function endGame() {
   showEndMenu();
 }
 
+document.body.style.backgroundImage = 'url(' + currentBack.src + ')';
+
 // Start game
 function loop() {
+  document.body.style.backgroundImage = 'url(' + currentBack.src + ')';
   context.clearRect(0, 0, canvas.clientWidth, canvas.height);
   context.drawImage(backGroundImage, 0, 0, canvas.width, canvas.height);
   context.drawImage(planeImage, planeX, planeY, PLANE_WIDTH, PLANE_HEIGHT);

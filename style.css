@@ -6,7 +6,7 @@
 body{
     background-color: lightgoldenrodyellow;
     font-family: "Cartoon" , sans-serif;
-    background-image: url(graphics/environment/cielo.jpg);
+    /* background-image: url(graphics/environment/cielo.jpg); */
     background-size: cover;
     background-repeat: repeat;
    max-height: 820px;
@@ -37,7 +37,6 @@ canvas {
     left: 50%; 
     color: white;
     transform: translate(-50%,25%); 
-    /* border: 3px solid brown; */
 }
 
 #end button {
